@@ -21,7 +21,7 @@ spec:
                   key: TFL_API_KEY
             # Plain environment variables
             - name: S3_BUCKET
-              value: "ds5220project2"
+              value: "project2sg"
             - name: DYNAMODB_TABLE
               value: "crowding"
             - name: NAPTAN_ID
