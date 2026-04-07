@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: london-crowding-pipeline
+spec:
+  # Run once every hour (at the top of the hour)
+  schedule: "0 * * * *" 
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: crowding-app
+            image: ghcr.io/yani-iben/london-crowding:latest
+            imagePullPolicy: Always
+            env:
+            - name: TFL_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tfl-api-secret
+                  key: TFL_API_KEY
+            # Plain environment variables
+            - name: S3_BUCKET
+              value: "ds5220project2"
+            - name: DYNAMODB_TABLE
+              value: "crowding"
+            - name: NAPTAN_ID
+              value: "940GZZLUVIC"
+          restartPolicy: OnFailure
