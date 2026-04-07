@@ -21,6 +21,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./london-crowding
+          context: ./
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/london-crowding:latest
