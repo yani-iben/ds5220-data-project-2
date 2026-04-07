@@ -8,6 +8,7 @@ from boto3.dynamodb.conditions import Key
 
 API_KEY=os.getenv("TFL_API_KEY")
 S3_BUCKET=os.getenv("S3_BUCKET")
+NAPTAN_ID = os.environ.get("NAPTAN_ID", "940GZZLUVIC")
 
 API_URL= f"https://api.tfl.gov.uk/crowding/{NAPTAN_ID}/Live?app_key={API_KEY}"
 
@@ -20,7 +21,7 @@ def fetch_crowding_data():
         print(f"Crowding level: {value}%")
     else:
         print("No crowding data available at the moment.")
-        
+
 def get_data_from_dynamodb():
     dynamodb=boto3.resource('dynamodb', region_name='us-east-1')
     table=dynamodb.Table('CrowdingData')
