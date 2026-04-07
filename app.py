@@ -5,6 +5,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 from boto3.dynamodb.conditions import Key
+from decimal import Decimal
 
 # 1. Setup Variables
 API_KEY = os.getenv("TFL_API_KEY")
@@ -25,6 +26,7 @@ def run_pipeline():
     data = response.json()
     
     crowding_val = data.get("percentageOfBaseline", 0) # API uses capital 'O'
+    crowding_decimal=Decimal(str(crowding_val)) # Convert to Decimal for DynamoDB
     timestamp = str(datetime.now().timestamp())
     
     # 3. Write to DynamoDB (The missing piece!)
@@ -33,7 +35,7 @@ def run_pipeline():
         Item={
             'timestamp': timestamp,
             'station_id': NAPTAN_ID,
-            'crowding_level': crowding_val
+            'crowding_level': crowding_decimal
         }
     )
 
