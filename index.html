@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>London Crowding Tracker</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        img { max-width: 80%; border: 1px solid #ccc; box-shadow: 2px 2px 10px #aaa; }
+        .info { margin-top: 20px; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>TfL Live Crowding: Victoria Station</h1>
+    <p>Data updates every hour via Kubernetes CronJob.</p>
+    
+    <img src="plot.png" alt="Crowding Plot">
+
+    <div class="info">
+        <p>Project: DS 5220 | 72-Hour Data Collection</p>
+        <p>Current Station: 940GZZLUVIC</p>
+    </div>
+
+    <script>
+        // Optional: Auto-refresh the page every 15 minutes
+        setTimeout(function(){ location.reload(); }, 900000);
+    </script>
+</body>
+</html>
